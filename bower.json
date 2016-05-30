@@ -3,8 +3,7 @@
   "private": true,
   "dependencies": {
     "javascript-kit": "git@github.com:prismicio/javascript-kit.git#^3.0.0",
-    "react": "^15.1.0",
-    "wiki-infobox": "git@github.com:michalbe/wiki-infobox.git"
+    "react": "^15.1.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
