@@ -28,13 +28,9 @@
         <h1>Dog Daze</h1>
     </header>
     <main>
-        <ul>
-            <li>
-                <h2>Cocker Spaniel</h2>
-                <h3>Gooddog</h3>
-                <p>Cocker Spaniel is a good dog with doogy good dogs</p>
-            </li>
-        </ul>
+        <div class="list--breeds">
+            <p>loading...</p>
+        </div>
     </main>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
@@ -47,10 +43,12 @@
       ga('create','UA-XXXXX-X');ga('send','pageview');
     </script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
-    <script src="/bower_components/jquery/dist/jquery.js"></script>
     <script src="/bower_components/javascript-kit/dist/prismic.io.min.js"></script>
+    <script src="/bower_components/react/react.js"></script>
+    <script src="/bower_components/react/react-dom.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
