@@ -2,8 +2,9 @@
   "name": "dogdaze",
   "private": true,
   "dependencies": {
-    "jquery": "~2.1.1",
-    "javascript-kit": "git@github.com:prismicio/javascript-kit.git#^3.0.0"
+    "javascript-kit": "git@github.com:prismicio/javascript-kit.git#^3.0.0",
+    "react": "^15.1.0",
+    "wiki-infobox": "git@github.com:michalbe/wiki-infobox.git"
   },
   "devDependencies": {
     "chai": "^3.5.0",
