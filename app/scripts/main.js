@@ -12,9 +12,20 @@ var DogBreedItem = React.createClass({
 
 var Filters = React.createClass({
 	handleChange: function(e) {
+		var stateTag;
+		if (e.currentTarget.name == "tag") {
+			if (e.currentTarget.checked) {
+				stateTag = e.currentTarget.value;
+			} else {
+				stateTag = '';
+			}
+		} else {
+			stateTag = this.props.filterTag;
+		}
+
 		this.props.onUserInput(
 			this.refs.filterTextInput.value,
-			(e.currentTarget.name == "tag" ? e.currentTarget.value : this.props.filterTag)
+			stateTag
 		);
 	},
 	render: function() {
@@ -23,7 +34,7 @@ var Filters = React.createClass({
 			tags.push(
 				<label key={tag}>
 					<input
-						type="radio"
+						type="checkbox"
 						name="tag"
 						ref="filterTagInput"
 						checked={this.props.filterTag === tag}
