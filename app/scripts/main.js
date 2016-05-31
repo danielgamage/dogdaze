@@ -1,5 +1,4 @@
-var tagArray   = [],
-tag,
+var tag,
 breed;
 
 var DogBreedItem = React.createClass({
@@ -11,32 +10,43 @@ var DogBreedItem = React.createClass({
 	}
 });
 
-var DogBreedTag = React.createClass({
-	render: function() {
-		return (
-			<label htmlFor={this.props.tag} >
-				<input type="radio" name="tag" id={this.props.tag} />
-				{this.props.tag}
-			</label>
-		);
-	}
-});
-
-var SearchBar = React.createClass({
-	handleChange: function() {
+var Filters = React.createClass({
+	handleChange: function(e) {
 		this.props.onUserInput(
-			this.refs.filterTextInput.value
+			this.refs.filterTextInput.value,
+			(e.currentTarget.name == "tag" ? e.currentTarget.value : this.props.filterTag)
 		);
 	},
 	render: function() {
+		var tags = [];
+		for (let tag of this.props.tags) {
+			tags.push(
+				<label key={tag}>
+					<input
+						type="radio"
+						name="tag"
+						ref="filterTagInput"
+						checked={this.props.filterTag === tag}
+						onChange={this.handleChange}
+						value={tag}
+						/>
+					{tag}
+				</label>
+			);
+		}
 		return (
-			<input
-				type="text"
-				placeholder="Search..."
-				value={this.props.filterText}
-				ref="filterTextInput"
-				onChange={this.handleChange}
-				/>
+			<form>
+				<h3>Filter by Group</h3>
+				{tags}
+				<h3>Or Search for your Dog</h3>
+				<input
+					type="text"
+					placeholder="Search..."
+					value={this.props.filterText}
+					ref="filterTextInput"
+					onChange={this.handleChange}
+					/>
+			</form>
 		);
 	}
 });
@@ -44,43 +54,43 @@ var SearchBar = React.createClass({
 var FilterableDogApp = React.createClass({
 	getInitialState: function() {
 		return {
-			filterText: ''
+			filterText: '',
+			filterTag: ''
 		};
 	},
-	handleUserInput: function(filterText) {
+	handleUserInput: function(filterText, filterTag) {
 		this.setState({
-			filterText: filterText
+			filterText: filterText,
+			filterTag: filterTag
 		});
 	},
 	render: function() {
 		var breedArray = [];
+		var tagArray   = [];
+
 		for (let result of this.props.data.results) {
 			var breed = {};
 			breed.name = result.data['breed.name'].value[0].text;
 			breed.tag  = result.tags[0];
 			// breed.desc = result.data['breed.short_lede'].value[0].text;
 
-			if (breed.name.indexOf(this.state.filterText) !== -1) {
+			if (breed.name.indexOf(this.state.filterText) !== -1 && breed.tag.indexOf(this.state.filterTag) !== -1) {
 				breedArray.push(<DogBreedItem breed={breed} key={breed.name}/>);
 			}
-			console.log(breedArray);
 
 			// Add tag to tagArray if it's not already in there
 			if (tagArray.indexOf(breed.tag) == -1) {
-				tagArray.push(<DogBreedTag tag={breed.tag} key={breed.tag}/>);
+				tagArray.push(breed.tag);
 			}
 		}
 		return (
 			<div>
-				<form>
-					<h3>Filter by Group</h3>
-					{tagArray}
-					<h3>Or Search for your Dog</h3>
-					<SearchBar
-						filterText={this.state.filterText}
-						onUserInput={this.handleUserInput}
-						/>
-				</form>
+				<Filters
+					tags={tagArray}
+					filterTag={this.state.filterTag}
+					filterText={this.state.filterText}
+					onUserInput={this.handleUserInput}
+					/>
 				{breedArray}
 			</div>
 		);
