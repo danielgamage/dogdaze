@@ -2,6 +2,7 @@
 const gulp = require('gulp');
 const gulpLoadPlugins = require('gulp-load-plugins');
 const browserSync = require('browser-sync');
+const cssnext = require('postcss-cssnext');
 const del = require('del');
 const wiredep = require('wiredep').stream;
 
@@ -9,9 +10,12 @@ const $ = gulpLoadPlugins();
 const reload = browserSync.reload;
 
 gulp.task('styles', () => {
+  var processors = [
+    cssnext({browsers: ['last 1 version']}),
+  ];
   return gulp.src('app/styles/*.css')
     .pipe($.sourcemaps.init())
-    .pipe($.autoprefixer({browsers: ['> 1%', 'last 2 versions', 'Firefox ESR']}))
+    .pipe($.postcss(processors))
     .pipe($.sourcemaps.write())
     .pipe(gulp.dest('.tmp/styles'))
     .pipe(reload({stream: true}));
