@@ -35,7 +35,7 @@ var Filters = React.createClass({
 		var groups = [];
 		for (let tag of this.props.tags) {
 			groups.push(
-				<span key={tag} >
+				<span key={tag} className="filter--group">
 					<input
 						type="checkbox"
 						name="group"
@@ -57,6 +57,7 @@ var Filters = React.createClass({
 				{groups}
 				<h3>Or Search for your Dog</h3>
 				<input
+					className="filter--search"
 					type="text"
 					placeholder="Search..."
 					value={this.props.filterSearch}

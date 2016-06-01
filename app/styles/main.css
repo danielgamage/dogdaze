@@ -28,7 +28,7 @@ body {
   padding: 0.2em 0;
 }
 
-span{
+.filter--group{
     display: inline-block;
     position: relative;
     margin-right: 5px;
@@ -56,4 +56,8 @@ span{
         border-radius: 4px;
         font-weight: 900;
     }
+}
+
+.filter--search{
+    padding: 0.4rem 0.8rem;
 }
