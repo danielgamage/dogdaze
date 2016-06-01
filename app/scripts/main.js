@@ -32,17 +32,20 @@ var Filters = React.createClass({
 		var tags = [];
 		for (let tag of this.props.tags) {
 			tags.push(
-				<label key={tag}>
+				<span key={tag} >
 					<input
 						type="checkbox"
 						name="tag"
+						id={"tag" + tag}
 						ref="filterTagInput"
 						checked={this.props.filterTag === tag}
 						onChange={this.handleChange}
 						value={tag}
 						/>
-					{tag}
-				</label>
+					<label htmlFor={"tag" + tag}>
+						{tag}
+					</label>
+				</span>
 			);
 		}
 		return (

@@ -27,3 +27,33 @@ body {
   color: #000;
   padding: 0.2em 0;
 }
+
+span{
+    display: inline-block;
+    position: relative;
+    margin-right: 5px;
+    margin-bottom: 1px;
+    overflow: hidden;
+    & input {
+        appearance: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        &:checked {
+            & + label{
+                background: black;
+                color: white;
+            }
+        }
+    }
+    & label {
+        display: inline-block;
+        padding: 0.4rem 0.8rem;
+        border: 0.2em solid black;
+        text-transform: uppercase;
+        border-radius: 4px;
+        font-weight: 900;
+    }
+}
