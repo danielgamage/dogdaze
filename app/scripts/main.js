@@ -88,7 +88,7 @@ var FilterableDogApp = React.createClass({
 			breed.tag  = result.tags[0];
 			// breed.desc = result.data['breed.short_lede'].value[0].text;
 
-			if (breed.name.indexOf(this.state.filterText) !== -1 && breed.tag.indexOf(this.state.filterTag) !== -1) {
+			if (breed.name.toLowerCase().indexOf(this.state.filterText.toLowerCase()) !== -1 && breed.tag.indexOf(this.state.filterTag) !== -1) {
 				breedArray.push(<DogBreedItem breed={breed} key={breed.name}/>);
 			}
 
