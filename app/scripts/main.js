@@ -3,9 +3,14 @@ breed;
 
 var DogBreedItem = React.createClass({
 	render: function() {
+		var breed = this.props.breed;
+		var breedImgSrc = (breed.data['breed.image'] ? breed.data['breed.image'].value.views.icon.url : null);
 		return (<li>
-			<h1>{this.props.breed.name}</h1>
-			<h3>{this.props.breed.tag}</h3>
+			<img
+				src={breedImgSrc}
+			/>
+			<h1>{breed.data['breed.name'].value[0].text}</h1>
+			<h3>{breed.tags[0]}</h3>
 		</li>);
 	}
 });
@@ -91,11 +96,10 @@ var FilterableDogApp = React.createClass({
 			var breed = {};
 			breed.name = result.data['breed.name'].value[0].text;
 			breed.tag  = result.tags[0];
-			// breed.desc = result.data['breed.short_lede'].value[0].text;
 
 			// Add breed to breedItems if it passes filtering
 			if (breed.name.toLowerCase().indexOf(this.state.filterSearch.toLowerCase()) !== -1 && breed.tag.indexOf(this.state.filterGroup) !== -1) {
-				breedItems.push(<DogBreedItem breed={breed} key={breed.name}/>);
+				breedItems.push(<DogBreedItem breed={result} key={breed.name}/>);
 			}
 
 			// Add tag to tagList if it's not already in there
@@ -121,6 +125,7 @@ var FilterableDogApp = React.createClass({
 Prismic.api("https://dogdaze.prismic.io/api").then(function(api) {
 	return api.query(""); // An empty query will return all the documents
 }).then(function(prismicDocuments) {
+	console.log(prismicDocuments);
 	// Render app
 	ReactDOM.render(
 		<FilterableDogApp data={prismicDocuments} />,
