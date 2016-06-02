@@ -3,6 +3,7 @@ const gulp = require('gulp');
 const gulpLoadPlugins = require('gulp-load-plugins');
 const browserSync = require('browser-sync');
 const cssnext = require('postcss-cssnext');
+const webpack = require('webpack-stream');
 const del = require('del');
 const wiredep = require('wiredep').stream;
 
@@ -22,12 +23,13 @@ gulp.task('styles', () => {
 });
 
 gulp.task('scripts', () => {
-  return gulp.src('app/scripts/**/*.js')
+  return gulp.src('app/scripts/app.js')
     .pipe($.plumber())
     .pipe($.sourcemaps.init())
+    .pipe(webpack(require('./webpack.config.js')))
     .pipe($.babel())
     .pipe($.sourcemaps.write('.'))
-    .pipe(gulp.dest('.tmp/scripts'))
+    .pipe(gulp.dest('.tmp/scripts/'))
     .pipe(reload({stream: true}));
 });
 

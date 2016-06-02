@@ -1,17 +1,11 @@
 {
   "name": "dogdaze",
   "private": true,
-  "dependencies": {
-    "javascript-kit": "git@github.com:prismicio/javascript-kit.git#^3.0.0",
-    "react": "^15.1.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "chai": "^3.5.0",
     "mocha": "^2.5.3"
   },
   "overrides": {
-    "javascript-kit": {
-      "main": "dist/prismic.io.min.js"
-    }
   }
 }
