@@ -1,6 +1,7 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var Prismic = require('prismic.io');
+import FlipMove from 'react-flip-move';
 
 var tag,
 breed;
@@ -119,7 +120,14 @@ var FilterableDogApp = React.createClass({
 					filterSearch={this.state.filterSearch}
 					onUserInput={this.handleUserInput}
 					/>
-				{breedItems}
+				<FlipMove
+					enterAnimation="elevator"
+					leaveAnimation="elevator"
+					typeName="ul"
+					className="list--breeds"
+					>
+					{breedItems}
+				</FlipMove>
 			</div>
 		);
 	}
@@ -133,7 +141,7 @@ Prismic.api("https://dogdaze.prismic.io/api").then(function(api) {
 	// Render app
 	ReactDOM.render(
 		<FilterableDogApp data={prismicDocuments} />,
-		document.querySelector('.list--breeds')
+		document.querySelector('.container--app')
 	);
 }, function(err) {
 	console.log("Something went wrong: ", err);
