@@ -1,7 +1,19 @@
+@custom-media --small-min (min-width: 30em);
+@custom-media --small-max (max-width: 30em);
+/* check out media queries ranges for a better syntax !*/
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
 body {
   background: #fafafa;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #333;
+  padding: 1rem;
+  margin: 0;
 }
 
 .hero-unit {
@@ -58,6 +70,37 @@ body {
     }
 }
 
-.filter--search{
+.filter--search {
     padding: 0.4rem 0.8rem;
+}
+
+.list--breeds {
+    list-style: none;
+    display: flex;
+    flex-flow: row wrap;
+    padding: 0;
+    & li {
+        width: calc((100% - 1rem) / 2);
+        background-color: #eee;
+        padding: 1rem;
+        margin-right: 1rem;
+        @media (--small-max) {
+            &:nth-child(2n) {
+                margin-right: 0;
+            }
+
+            &:nth-child(n + 3) {
+                margin-top: 1rem;
+            }
+        }
+        @media (--small-min) {
+            width: calc((100% - 3rem) / 4);
+            &:nth-child(n + 5) {
+                margin-top: 1rem;
+            }
+            &:nth-child(4n) {
+                margin-right: 0;
+            }
+        }
+    }
 }

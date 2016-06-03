@@ -6,6 +6,15 @@ import FlipMove from 'react-flip-move';
 var tag,
 breed;
 
+const breedEnterAnimation = {
+    from: { transform: 'scale(0.8)', opacity: 0 },
+    to:   { transform: '', opacity: '' }
+}
+const breedLeaveAnimation = {
+	from: { transform: 'scale(1)', opacity: 1 },
+    to:   { transform: 'scale(0.8)', opacity: 0 }
+}
+
 var DogBreedItem = React.createClass({
 	render: function() {
 		var breed = this.props.breed;
@@ -121,10 +130,13 @@ var FilterableDogApp = React.createClass({
 					onUserInput={this.handleUserInput}
 					/>
 				<FlipMove
-					enterAnimation="elevator"
-					leaveAnimation="elevator"
+					enterAnimation={breedEnterAnimation}
+					leaveAnimation={breedLeaveAnimation}
 					typeName="ul"
 					className="list--breeds"
+					staggerDurationBy="15"
+					staggerDelayBy="20"
+					easing="ease"
 					>
 					{breedItems}
 				</FlipMove>
