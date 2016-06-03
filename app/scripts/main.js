@@ -24,7 +24,7 @@ var DogBreedItem = React.createClass({
 				src={breedImgSrc}
 			/>
 			<h1>{breed.data['breed.name'].value[0].text}</h1>
-			<h3>{breed.tags[0]}</h3>
+			<h3><label htmlFor={"group" + breed.tags[0]}>{breed.tags[0]}</label></h3>
 		</li>);
 	}
 });
