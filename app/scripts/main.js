@@ -7,12 +7,16 @@ var tag,
 breed;
 
 const breedEnterAnimation = {
-    from: { transform: 'scale(0.8)', opacity: 0 },
+    from: { transform: 'scale(0.9)', opacity: 0 },
     to:   { transform: '', opacity: '' }
 }
 const breedLeaveAnimation = {
 	from: { transform: 'scale(1)', opacity: 1 },
-    to:   { transform: 'scale(0.8)', opacity: 0 }
+    to:   { transform: 'scale(0.9)', opacity: 0 }
+}
+
+var breedLeave = function() {
+	console.log(this);
 }
 
 var DogBreedItem = React.createClass({
@@ -137,6 +141,8 @@ var FilterableDogApp = React.createClass({
 					staggerDurationBy="15"
 					staggerDelayBy="20"
 					easing="ease"
+					duration="200"
+					onStart={breedLeave}
 					>
 					{breedItems}
 				</FlipMove>
