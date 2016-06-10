@@ -1,15 +1,23 @@
-@custom-media --small-min (min-width: 30em);
-@custom-media --small-max (max-width: 30em);
-/* check out media queries ranges for a better syntax !*/
-
 :root{
     --width-container: 64rem;
 }
+
+@custom-media --small        (width >= 40em);
+@custom-media --small-max    (width <= 40em);
+@custom-media --medium       (width >= 60em);
+@custom-media --large        (width >= 80em);
+
+@custom-media --small-medium (40em <= width <= 60em);
+@custom-media --medium-large (60em <= width <= 80em);
 
 *,
 *::before,
 *::after {
     box-sizing: border-box;
+}
+
+a{
+    color: inherit;
 }
 
 body {
@@ -18,15 +26,18 @@ body {
   color: #333;
   margin: 0;
 }
-.header--site {
+.container {
     max-width: var(--width-container);
-    margin: auto;
     padding: 1rem;
+    margin: auto;
+}
+
+.footer--site {
+    background-color: #272630;
+    color: white;
+    padding: 3rem 0;
 }
 main {
-    max-width: var(--width-container);
-    margin: auto;
-    padding: 1rem;
 }
 
 .hero-unit {
@@ -92,29 +103,31 @@ main {
     display: flex;
     flex-flow: row wrap;
     padding: 0;
+    margin: 1rem -1rem;
     & li {
-        width: calc((100% - 1rem) / 2);
+        position: relative;
+        width: calc(100% / 2);
         height: 22rem;
-        background-color: #eee;
-        padding: 1rem;
-        margin-right: 1rem;
-        @media (--small-max) {
-            &:nth-child(2n) {
-                margin-right: 0;
-            }
-
-            &:nth-child(n + 3) {
-                margin-top: 1rem;
-            }
+        padding: 2rem;
+        @media (--small-medium) {
+            width: calc(100% / 3);
         }
-        @media (--small-min) {
-            width: calc((100% - 3rem) / 4);
-            &:nth-child(n + 5) {
-                margin-top: 1rem;
-            }
-            &:nth-child(4n) {
-                margin-right: 0;
-            }
+        @media (--medium) {
+            width: calc(100% / 4);
         }
+        &::after{
+            content: '';
+            position: absolute;
+            z-index: -1;
+            top: 1rem;
+            left: 1rem;
+            bottom: 1rem;
+            right: 1rem;
+            border: 1px solid #ddd;
+        }
+    }
+    &::after{
+        content: '';
+        flex: auto;
     }
 }
